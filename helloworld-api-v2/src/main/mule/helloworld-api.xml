@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1291cf1c-03ee-42db-82b4-b95b37c1c195" >
+		<http:listener-connection host="0.0.0.0" port="8086" />
+	</http:listener-config>
+	<flow name="helloworld-apiFlow" doc:id="d70ba8b6-8b3d-451c-b202-fbb1f1c2b0d3" >
+		<http:listener doc:name="/helloworld" doc:id="837d3e52-6950-4d3c-a471-3fcabcf62731" config-ref="HTTP_Listener_config" path="/helloworld"/>
+		<set-payload value='#[output
+application/json
+---
+"Hello world Mule"]' doc:name="Set Payload" doc:id="04be4523-5337-4361-91d8-0e772a90171d" />
+		<logger level="INFO" doc:name="Logger" doc:id="1bf1b282-21ab-4f50-aa3f-3843a1e2da93" message="#[payload]" />
+	</flow>
+</mule>
